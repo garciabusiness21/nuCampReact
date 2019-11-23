@@ -1,8 +1,8 @@
 class Student {
-    constructor(name, email, comminity) {
+    constructor(name, email, community) {
         this.name = name;
         this.email = email;
-        this.community = comunity;
+        this.community = community;
     }
 }
 
@@ -12,7 +12,17 @@ class Bootcamp {
         this.level = level;
         this.students = students;
     }
+
     registerStudent(student){
-        students.filter(n => n );
+        if (this.students.filter(student => student.email === student.email).length){
+            console.log(`The email ${student.email} is already registered`);
+        } else{
+            this.students.push(student);
+            console.log(`Registering ${student.email} to the bootcamp Web Dev Fundamentals`);
+            return this.students;
+        }
     }
 }
+
+const neo = new Student ("Neo", "neo@matrix", "Seattle");
+const webdev = new Bootcamp ("Web Development", "expert");

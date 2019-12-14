@@ -7,6 +7,10 @@ import { Card, CardImg, CardText, CardBody,
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 
+const required = val => val && val.lenght;
+const maxLenght = len => val => !val || (val.lenght <= len);
+const minlenght = len => val => val && (val.lenght >= len);
+
     function RenderCampsite({campsite}){
         return (
             <div className="col-md-5 m-1">
@@ -108,18 +112,28 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
                                 <div className="form-group">
                                     <Label htmlFor="author">Your Name</Label>
                                     <Control.text 
-                                    className="form-control" 
-                                    model=".author" id="author" 
-                                    name="author" 
-                                    invalid ={errors.author}
-                                    onBlur={this.handleBlur("author")}
-                                    innerRef={input => this.password = input}
+                                        className="form-control" 
+                                        model=".author" id="author" 
+                                        name="author" 
+                                        invalid ={errors.author}
+                                        onBlur={this.handleBlur("author")}
+                                        innerRef={input => this.password = input}
+                                        validators= {{
+                                            required,
+                                            minlenght: minlenght(2),
+                                            maxLenght: maxLenght(15)
+                                        }}
                                     />
                                     <FormFeedback>{errors.author}</FormFeedback>
                                     <Errors
+                                        className="text-danger"
                                         model=".author"
+                                        show="touched"
+                                        component="div"
                                         messages={{
-                                            isRequired: 'Please provide an email address.'
+                                            required: 'Required',
+                                            minlenght: 'Must be at least 2 characters',
+                                            maxLenght: '15 character limit'
                                         }}
                                     />
                                 </div>

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import { Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem, Jumbotron, Button, Modal, ModalHeader, ModalBody, Input, Form, FormGroup, Label } from 'reactstrap';
+import { Nav, Navbar, NavbarBrand, NavbarToggler, 
+        Collapse, NavItem, Jumbotron, Button, Modal, 
+        ModalHeader, ModalBody, Input, Form, FormGroup, Label 
+        } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
+
 
 class Header extends Component {
 
@@ -78,7 +82,7 @@ class Header extends Component {
                             </Nav>
                             <span className="navbar-text ml-auto">
                                 <Button outline onClick={this.toggleModal}>
-                                    <i className="fa fa-sign-in fa-lg" />Login
+                                    <i className="fa fa-sign-in fa-lg" /> Login
                                 </Button>
                             </span>
                         </Collapse>
@@ -90,7 +94,7 @@ class Header extends Component {
                     <ModalBody>
                         <Form onSubmit={this.handleLogin}>
                             <FormGroup>
-                                <Label htmlFor="useename">User Name</Label>
+                                <Label htmlFor="username">User Name</Label>
                                 <Input type="text" id="username" name="username"innerRef={input => this.username = input}/>
                             </FormGroup>
                             <FormGroup>
@@ -103,7 +107,7 @@ class Header extends Component {
                                     Remember me
                                 </Label>
                             </FormGroup>
-                            <Button type ="submit" value="submit" color="primary">Login</Button>
+                            <Button type ="submit" value="submit" color="primary">Submit</Button>
                         </Form>
                     </ModalBody>
                 </Modal>

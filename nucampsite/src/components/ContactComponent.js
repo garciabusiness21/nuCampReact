@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Breadcrumb, BreadcrumbItem, Button, Label, Col, Row } from 'reactstrap';
-
 import { Link } from 'react-router-dom';
-import { Control, LocalForm } from 'react-redux-form'
+import { LocalForm, Control, Errors } from 'react-redux-form';
 
 class Contact extends Component {
     constructor (props){
@@ -23,7 +22,7 @@ class Contact extends Component {
             }
         };
         
-        this.handleSbmit = this.handleSubmit.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(values){

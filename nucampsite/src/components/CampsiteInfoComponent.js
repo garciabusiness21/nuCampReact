@@ -1,7 +1,11 @@
-import React from 'react';
-import { Card, CardImg, CardText, CardBody, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import React, { Component } from 'react';
+import { Card, CardImg, CardText, CardBody, 
+        CardTitle, Breadcrumb, BreadcrumbItem, 
+        Button, Label, Col, Row, Modal, ModalHeader, 
+        ModalBody, Form, FormGroup, Input 
+        } from 'reactstrap';
 import { Link } from 'react-router-dom';
-
+import { Control, LocalForm, Errors } from 'react-redux-form';
 
     function RenderCampsite({campsite}){
         return (
@@ -26,10 +30,77 @@ import { Link } from 'react-router-dom';
                         return(<div className="p-2" key={comment.id}> {comment.text} <br/> --{comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</div>);
                     
                 })}
+                <CommentForm/>
             </div>
             );
         }
             
+    }
+
+    class CommentForm extends Component {
+
+            constructor(props) {
+                super(props);
+        
+                this.state = {
+                  isModalOpen: false
+                };
+                this.toggleModal = this.toggleModal.bind(this);
+                this.handleSubmit = this.handleSubmit.bind(this);
+            }
+        
+            toggleModal() {
+                this.setState({
+                    isModalOpen: !this.state.isModalOpen
+                });
+            }
+
+            handleSubmit(values){
+                console.log("Currente state is: " + JSON.stringify(values));
+                alert("Currente state is: " + JSON.stringify(values));
+                this.toggleModal();
+            }
+
+        render() {
+            return (
+                <React.Fragment>
+                    <Button onClick={this.toggleModal} type="submit" color="btn btn-outline-secondary">
+                        <i className="fa fa-pencil fa-lg" /> Submit Comment            
+                    </Button>
+
+                    <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                    <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
+                    <ModalBody>
+                        <LocalForm onSubmit={values =>this.handleSubmit(values)}>
+                            <Form onSubmit={this.handleLogin}>
+                                <div className="form-group">
+                                    <Label htmlFor="rating">Rating</Label>
+                                        <Control.select className="form-control" model=".rating" id="rating" name="rating" >
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </Control.select>
+                                </div>
+                                <div className="form-group">
+                                    <Label htmlFor="author">Your Name</Label>
+                                    <Control.text className="form-control" model=".author" id="author" name="author" innerRef={input => this.password = input}
+                                    />
+                                </div>
+                                <div  className="form-group">
+                                    <Label htmlFor="comment"> Comment </Label>
+                                        <Control.textarea className="form-control" model=".text" type="textarea" rows="5" name="comment" innerRef={input => this.remember = input}
+                                        />
+                                </div>
+                                <Button type ="submit" value="submit" color="primary">Submit</Button>
+                            </Form>
+                        </LocalForm>
+                    </ModalBody>
+                    </Modal>
+                </React.Fragment>
+            )
+        }
     }
 
     function CampsiteInfo(props){

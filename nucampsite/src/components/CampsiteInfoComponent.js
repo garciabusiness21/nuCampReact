@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody, 
-        CardTitle, Breadcrumb, BreadcrumbItem, 
-        Button, Label, Col, Row, Modal, ModalHeader, 
-        ModalBody, Form, FormGroup, Input 
+        Breadcrumb, BreadcrumbItem, 
+        Button, Label,  Modal, ModalHeader, 
+        ModalBody, Form, FormFeedback
         } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
@@ -43,10 +43,30 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
                 super(props);
         
                 this.state = {
-                  isModalOpen: false
+                    author: '',
+                    isModalOpen: false,
+                    touched: { author: false }
                 };
                 this.toggleModal = this.toggleModal.bind(this);
                 this.handleSubmit = this.handleSubmit.bind(this);
+            }
+
+            validate (author) {
+                const errors = { author: '' };
+                if (this.state.touched.author){
+                    if (author.lenght < 2) {
+                        errors.author = 'Your Name must be at least 2 characters in lenght.';    
+                    } else if (author.lenght > 15) {
+                        errors.author = 'Your name must be less than 15 characters in lenght.';
+                    }
+                }
+                return errors;
+            }
+
+            handleBlur = (field) => () => {
+                this.setState({
+                    touched: {...this.state.touched, [field]: true}
+                });
             }
         
             toggleModal() {
@@ -62,6 +82,8 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
             }
 
         render() {
+            const errors = this.validate(this.state.author);
+
             return (
                 <React.Fragment>
                     <Button onClick={this.toggleModal} type="submit" color="btn btn-outline-secondary">
@@ -85,12 +107,25 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
                                 </div>
                                 <div className="form-group">
                                     <Label htmlFor="author">Your Name</Label>
-                                    <Control.text className="form-control" model=".author" id="author" name="author" innerRef={input => this.password = input}
+                                    <Control.text 
+                                    className="form-control" 
+                                    model=".author" id="author" 
+                                    name="author" 
+                                    invalid ={errors.author}
+                                    onBlur={this.handleBlur("author")}
+                                    innerRef={input => this.password = input}
+                                    />
+                                    <FormFeedback>{errors.author}</FormFeedback>
+                                    <Errors
+                                        model=".author"
+                                        messages={{
+                                            isRequired: 'Please provide an email address.'
+                                        }}
                                     />
                                 </div>
                                 <div  className="form-group">
                                     <Label htmlFor="comment"> Comment </Label>
-                                        <Control.textarea className="form-control" model=".text" type="textarea" rows="5" name="comment" innerRef={input => this.remember = input}
+                                        <Control.textarea className="form-control" model=".comment" type="textarea" rows="5" name="comment" innerRef={input => this.remember = input}
                                         />
                                 </div>
                                 <Button type ="submit" value="submit" color="primary">Submit</Button>

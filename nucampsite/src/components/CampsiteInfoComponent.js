@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody, 
         Breadcrumb, BreadcrumbItem, 
         Button, Label,  Modal, ModalHeader, 
-        ModalBody, Form
+        ModalBody, Form, FormFeedback
         } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
@@ -54,6 +54,24 @@ const minlenght = len => val => val && (val.lenght >= len);
                 this.toggleModal = this.toggleModal.bind(this);
                 this.handleSubmit = this.handleSubmit.bind(this);
             }
+
+            validate (author) {
+                const errors = { author: '' };
+                if (this.state.touched.author){
+                    if (author.lenght < 2) {
+                        errors.author = 'Your Name must be at least 2 characters in lenght.';    
+                    } else if (author.lenght > 15) {
+                        errors.author = 'Your name must be less than 15 characters in lenght.';
+                    }
+                }
+                return errors;
+            }
+
+            handleBlur = (field) => () => {
+                this.setState({
+                    touched: {...this.state.touched, [field]: true}
+                });
+            }
         
             toggleModal() {
                 this.setState({
@@ -98,6 +116,7 @@ const minlenght = len => val => val && (val.lenght >= len);
                                         model=".author" id="author" 
                                         name="author" 
                                         invalid ={errors.author}
+                                        onBlur={this.handleBlur("author")}
                                         innerRef={input => this.password = input}
                                         validators= {{
                                             required,
@@ -105,6 +124,7 @@ const minlenght = len => val => val && (val.lenght >= len);
                                             maxLenght: maxLenght(15)
                                         }}
                                     />
+                                    <FormFeedback>{errors.author}</FormFeedback>
                                     <Errors
                                         className="text-danger"
                                         model=".author"

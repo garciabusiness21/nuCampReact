@@ -24,7 +24,7 @@ const minlenght = len => val => val && (val.lenght >= len);
         )
     }
 
-    function RenderComments({comments}){
+    function RenderComments({comments, addComment, campsiteId}) {
         if (comments) {
             return(
             <div className = "col-md-5 m-1">
@@ -34,7 +34,7 @@ const minlenght = len => val => val && (val.lenght >= len);
                         return(<div className="p-2" key={comment.id}> {comment.text} <br/> --{comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</div>);
                     
                 })}
-                <CommentForm/>
+                 <CommentForm campsiteId={campsiteId} addComment={addComment} />
             </div>
             );
         }
@@ -79,10 +79,9 @@ const minlenght = len => val => val && (val.lenght >= len);
                 });
             }
 
-            handleSubmit(values){
-                console.log("Currente state is: " + JSON.stringify(values));
-                alert("Currente state is: " + JSON.stringify(values));
+            handleSubmit(values) {
                 this.toggleModal();
+                this.props.addComment(this.props.campsiteId, values.rating, values.author, values.text);
             }
 
         render() {
@@ -168,7 +167,11 @@ const minlenght = len => val => val && (val.lenght >= len);
                     </div>
                     <div className = "row">
                         <RenderCampsite campsite={props.campsite}/>
-                        <RenderComments comments={props.comments}/>
+                        <RenderComments 
+                            comments={props.comments}
+                            addComment={props.addComment}
+                            campsiteId={props.campsite.id}
+                        />
                     </div>
                 </div>
             );

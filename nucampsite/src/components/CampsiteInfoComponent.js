@@ -162,7 +162,7 @@ const minlenght = len => val => val && (val.lenght >= len);
                 </div>
             );
         }
-        if (props.errMess){
+        if (props.errMess) {
             return (
                 <div className="container">
                     <div className="row">
@@ -173,8 +173,7 @@ const minlenght = len => val => val && (val.lenght >= len);
                 </div>
             );
         }
-
-        if (props.campsite){
+        if (props.campsite) {
             return (
                 <div className="container">
                     <div className="row">

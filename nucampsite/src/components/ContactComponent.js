@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Breadcrumb, BreadcrumbItem, Button, Label, Col, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { Form, Control, Errors, actions } from 'react-redux-form';
+import { Control, Form, Errors, actions } from 'react-redux-form';
 
 const required = val => val && val.lenght;
 const maxLenght = len => val => !val || (val.lenght <= len);
@@ -32,10 +32,10 @@ class Contact extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(values){
-        console.log("Currente state is: " + JSON.stringify(values));
-        alert("Currente state is: " + JSON.stringify(values));
-        this.props.resetFeedbackForm ();
+    handleSubmit(values) {
+        console.log('Current State is: ' + JSON.stringify(values));
+        alert('Current State is: ' + JSON.stringify(values));
+        this.props.resetFeedbackForm();
     }
 
     render () {
@@ -74,30 +74,30 @@ class Contact extends Component {
                       <hr />
                    </div>
                     <div className="col-md-10">
-                        <Form model="feedbackForm" onSubmit={values => this.handleSubmit(values)}>
-                            <Row className="form-group">
-                                <Label htmlFor="firstName" md={2}>First Name</Label>
-                                <Col md={10}>
-                                    <Control.text model=".firstname" type="text" id="firstName" name="firstName"
-                                        placeholder="First Name"
-                                        className="form-control"
-                                        validators= {{
-                                            required,
-                                            minlenght: minlenght(2),
-                                            maxLenght: maxLenght(15)
-                                        }}
-                                    />
-                                    <Errors
-                                        className="text-danger"
-                                        model=".firstName"
-                                        show="touched"
-                                        component="div"
-                                        messages={{
-                                            required: 'Required',
-                                            minlenght: 'Must be at least 2 characters',
-                                            maxLenght: '15 character limit'
-                                        }}
-                                    />
+                    <Form model="feedbackForm" onSubmit={values => this.handleSubmit(values)}>
+                        <Row className="form-group">
+                            <Label htmlFor="firstName" md={2}>First Name</Label>
+                            <Col md={10}>
+                                <Control.text model=".firstname" type="text" id="firstName" name="firstName"
+                                    placeholder="First Name"
+                                    className="form-control"
+                                    validators= {{
+                                        required,
+                                        minlenght: minlenght(2),
+                                        maxLenght: maxLenght(15)
+                                    }}
+                                />
+                                <Errors
+                                    className="text-danger"
+                                    model=".firstName"
+                                    show="touched"
+                                    component="div"
+                                    messages={{
+                                        required: 'Required',
+                                        minlenght: 'Must be at least 2 characters',
+                                        maxLenght: '15 character limit'
+                                    }}
+                                />
                                 </Col>
                             </Row>
                             <Row className="form-group">

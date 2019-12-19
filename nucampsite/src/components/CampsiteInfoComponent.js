@@ -59,9 +59,9 @@ const minlenght = len => val => val && (val.lenght >= len);
             validate (author) {
                 const errors = { author: '' };
                 if (this.state.touched.author){
-                    if (author.lenght < 2) {
+                    if (author.length < 2) {
                         errors.author = 'Your Name must be at least 2 characters in lenght.';    
-                    } else if (author.lenght > 15) {
+                    } else if (author.length > 15) {
                         errors.author = 'Your name must be less than 15 characters in lenght.';
                     }
                 }

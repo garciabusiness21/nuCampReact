@@ -3,9 +3,9 @@ import { Breadcrumb, BreadcrumbItem, Button, Label, Col, Row } from 'reactstrap'
 import { Link } from 'react-router-dom';
 import { Control, Form, Errors, actions } from 'react-redux-form';
 
-const required = val => val && val.lenght;
-const maxLenght = len => val => !val || (val.lenght <= len);
-const minlenght = len => val => val && (val.lenght >= len);
+const required = val => val && val.length;
+const maxLength = len => val => !val || (val.length <= len);
+const minlength = len => val => val && (val.length >= len);
 const isNumber = val => !isNaN(+val);
 const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
@@ -83,8 +83,8 @@ class Contact extends Component {
                                     className="form-control"
                                     validators= {{
                                         required,
-                                        minlenght: minlenght(2),
-                                        maxLenght: maxLenght(15)
+                                        minlength: minlength(2),
+                                        maxLength: maxLength(15)
                                     }}
                                 />
                                 <Errors
@@ -94,8 +94,8 @@ class Contact extends Component {
                                     component="div"
                                     messages={{
                                         required: 'Required',
-                                        minlenght: 'Must be at least 2 characters',
-                                        maxLenght: '15 character limit'
+                                        minlength: 'Must be at least 2 characters',
+                                        maxLength: '15 character limit'
                                     }}
                                 />
                                 </Col>
@@ -108,8 +108,8 @@ class Contact extends Component {
                                         className="form-control"
                                         validators= {{
                                             required,
-                                            minlenght: minlenght(2),
-                                            maxLenght: maxLenght(15)
+                                            minlength: minlength(2),
+                                            maxLength: maxLength(15)
                                         }}
                                     />
                                     <Errors
@@ -119,8 +119,8 @@ class Contact extends Component {
                                         component="div"
                                         messages={{
                                             required: 'Required',
-                                            minlenght: 'Must be at least 2 characters',
-                                            maxLenght: '15 character limit'
+                                            minlength: 'Must be at least 2 characters',
+                                            maxLength: '15 character limit'
                                         }}
                                     />
                                 </Col>                        
@@ -133,8 +133,8 @@ class Contact extends Component {
                                         className="form-control"
                                         validators= {{
                                             required,
-                                            minlenght: minlenght(10),
-                                            maxLenght: maxLenght(15),
+                                            minlength: minlength(10),
+                                            maxLength: maxLength(15),
                                             isNumber
                                         }}
                                     />
@@ -145,8 +145,8 @@ class Contact extends Component {
                                         component="div"
                                         messages={{
                                             required: 'Required',
-                                            minlenght: 'Must be at least 10 characters',
-                                            maxLenght: '15 number limit',
+                                            minlength: 'Must be at least 10 characters',
+                                            maxLength: '15 number limit',
                                             isNumber: 'Must be a Number'
                                         }}
                                     />

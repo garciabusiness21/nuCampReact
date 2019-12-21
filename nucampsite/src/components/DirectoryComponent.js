@@ -35,6 +35,7 @@ function Directory (props) {
                 </div>
             );
         }
+        
         if (props.campsites.errMess) {
             return (
                 <div className="container">
